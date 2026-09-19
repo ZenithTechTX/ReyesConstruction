@@ -1,8 +1,20 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
+
+  // PROD  -> Worker "reyes-construction"      (deploy from the main branch: npx wrangler deploy)
+  // DEV   -> Worker "reyes-construction-dev"  (deploy from the dev branch:  npx wrangler deploy --env dev)
   "name": "reyes-construction",
   "compatibility_date": "2026-06-01",
   "assets": {
     "directory": "."
+  },
+
+  "env": {
+    "dev": {
+      "name": "reyes-construction-dev",
+      "assets": {
+        "directory": "."
+      }
+    }
   }
 }
