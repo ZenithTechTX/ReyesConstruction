@@ -1,0 +1,13 @@
+# Files that live in the repo but must NOT be published on the website
+.assetsignore
+.gitignore
+.git
+.github
+.wrangler
+node_modules
+wrangler.jsonc
+package.json
+package-lock.json
+gallery-inbox
+update-gallery.ps1
+HOW-TO-ADD-PHOTOS.md
