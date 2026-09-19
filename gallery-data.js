@@ -2,11 +2,16 @@
 window.GALLERY = {
   categories: [
     { id: "remodeling", label: "Remodeling" },
-    { id: "painting", label: "Painting" }
+    { id: "painting", label: "Painting" },
+    { id: "bathroom", label: "Bathroom" }
   ],
   items: [
     { cat: "remodeling", src: "assets/gallery/remodeling/interior-framing.jpg", title: "Interior Framing", w: 1800, h: 1350 },
     { cat: "remodeling", src: "assets/gallery/remodeling/porch-ceiling.jpg", title: "Porch Ceiling", w: 1200, h: 900 },
-    { cat: "painting", src: "assets/gallery/painting/stained-shutters.jpg", title: "Stained Shutters", w: 1200, h: 900 }
+    { cat: "painting", src: "assets/gallery/painting/stained-shutters.jpg", title: "Stained Shutters", w: 1200, h: 900 },
+    { cat: "bathroom", src: "assets/gallery/bathroom/01-bathroom-remodel-before.jpg", title: "Bathroom Remodel Before", w: 640, h: 480 },
+    { cat: "bathroom", src: "assets/gallery/bathroom/02-bathroom-remodel-after.jpg", title: "Bathroom Remodel After", w: 640, h: 480 },
+    { cat: "bathroom", src: "assets/gallery/bathroom/03-bathroom-remodel-before.jpg", title: "Bathroom Remodel Before", w: 480, h: 640 },
+    { cat: "bathroom", src: "assets/gallery/bathroom/04-bathroom-remodel-after.jpg", title: "Bathroom Remodel After", w: 480, h: 640 }
   ]
 };
