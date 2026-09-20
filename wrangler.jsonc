@@ -2,11 +2,14 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
 
   // PROD  -> Worker "reyes-construction"      (deploy from the main branch: npx wrangler deploy)
+  //          Serves only the blank page in ./public-placeholder until the site is ready to launch.
+  //          TO LAUNCH: change the "directory" below from "./public-placeholder" to ".".
   // DEV   -> Worker "reyes-construction-dev"  (deploy from the dev branch:  npx wrangler deploy --env dev)
+  //          Serves the real site.
   "name": "reyes-construction",
   "compatibility_date": "2026-06-01",
   "assets": {
-    "directory": "."
+    "directory": "./public-placeholder"
   },
 
   "env": {
