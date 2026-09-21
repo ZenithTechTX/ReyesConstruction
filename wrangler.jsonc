@@ -2,14 +2,15 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
 
   // PROD  -> Worker "reyes-construction"      (deploy from the main branch: npx wrangler deploy)
-  //          Serves only the blank page in ./public-placeholder until the site is ready to launch.
-  //          No contact-form API here yet. TO LAUNCH: see the checklist at the bottom of this file.
+  //          Serves the real site. No contact-form API yet, so the form opens the visitor's email app.
+  //          See the checklist at the bottom of this file to turn on in-page email sending.
+  //          (./public-placeholder is a blank page; point the directory at it to hide the site again.)
   // DEV   -> Worker "reyes-construction-dev"  (deploy from the dev branch:  npx wrangler deploy --env dev)
   //          Serves the real site plus the contact-form API (src/worker.js).
   "name": "reyes-construction",
   "compatibility_date": "2026-06-01",
   "assets": {
-    "directory": "./public-placeholder"
+    "directory": "."
   },
 
   "env": {
@@ -40,11 +41,10 @@
     }
   }
 
-  // LAUNCH CHECKLIST (email + site)
+  // TURN ON IN-PAGE EMAIL FOR PROD (needs a domain on Cloudflare)
   //  1. Put the domain on Cloudflare (DNS) and run:  npx wrangler email sending enable <domain>
-  //  2. Set FROM_EMAIL and allowed_sender_addresses to website@<domain> (both env blocks below).
+  //  2. Set FROM_EMAIL and allowed_sender_addresses to website@<domain> in the dev block.
   //  3. Copy the dev block's "main", "assets.run_worker_first", "observability", "vars" and
-  //     "send_email" up to the top level, and change the top-level assets "directory" from
-  //     "./public-placeholder" to "." so the real site is served.
+  //     "send_email" up to the top level.
   //  4. Deploy from main:  npx wrangler deploy
 }
