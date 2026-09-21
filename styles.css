@@ -121,7 +121,7 @@ h4 { font-size: 1.25rem; font-weight: 700; letter-spacing: .03em; }
 @keyframes heroZoom { to { transform: scale(1); } }
 .hero__inner { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, .75fr); gap: 56px; align-items: center; }
 .pill {
-  display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 26px; line-height: 1.5;
   background: rgba(212, 173, 85, .1); border: 1px solid rgba(212, 173, 85, .35);
   color: var(--gold-hi); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 26px;
 }
@@ -282,6 +282,8 @@ h4 { font-size: 1.25rem; font-weight: 700; letter-spacing: .03em; }
 .form .is-invalid { border-color: #d0604a; }
 .form__status { min-height: 1.4em; font-size: .9rem; text-align: center; color: var(--gold-hi); }
 .form__status.is-error { color: #ee8a76; }
+.form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form button:disabled { opacity: .7; cursor: progress; }
 
 /* Footer */
 .footer { border-top: 1px solid var(--line); padding: 48px 0 40px; background: var(--bg); }

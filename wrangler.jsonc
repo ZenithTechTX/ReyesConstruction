@@ -3,9 +3,9 @@
 
   // PROD  -> Worker "reyes-construction"      (deploy from the main branch: npx wrangler deploy)
   //          Serves only the blank page in ./public-placeholder until the site is ready to launch.
-  //          TO LAUNCH: change the "directory" below from "./public-placeholder" to ".".
+  //          No contact-form API here yet. TO LAUNCH: see the checklist at the bottom of this file.
   // DEV   -> Worker "reyes-construction-dev"  (deploy from the dev branch:  npx wrangler deploy --env dev)
-  //          Serves the real site.
+  //          Serves the real site plus the contact-form API (src/worker.js).
   "name": "reyes-construction",
   "compatibility_date": "2026-06-01",
   "assets": {
@@ -15,9 +15,36 @@
   "env": {
     "dev": {
       "name": "reyes-construction-dev",
+      "main": "src/worker.js",
       "assets": {
-        "directory": "."
-      }
+        "directory": ".",
+        // Static files are served directly; only /api/* runs the Worker.
+        "run_worker_first": ["/api/*"]
+      },
+      "observability": { "enabled": true },
+
+      // Contact form email. TO_EMAIL receives the inquiries; FROM_EMAIL must be an address on a
+      // domain that has Email Sending enabled (npx wrangler email sending enable <domain>).
+      "vars": {
+        "TO_EMAIL": "reyesconstruction.info@gmail.com",
+        "FROM_EMAIL": "website@example.us" // TODO: replace with website@<the real domain>
+      },
+      "send_email": [
+        {
+          "name": "EMAIL",
+          // The binding can only send to / from these addresses. Keep them in sync with vars above.
+          "allowed_destination_addresses": ["reyesconstruction.info@gmail.com"],
+          "allowed_sender_addresses": ["website@example.us"] // TODO: same address as FROM_EMAIL
+        }
+      ]
     }
   }
+
+  // LAUNCH CHECKLIST (email + site)
+  //  1. Put the domain on Cloudflare (DNS) and run:  npx wrangler email sending enable <domain>
+  //  2. Set FROM_EMAIL and allowed_sender_addresses to website@<domain> (both env blocks below).
+  //  3. Copy the dev block's "main", "assets.run_worker_first", "observability", "vars" and
+  //     "send_email" up to the top level, and change the top-level assets "directory" from
+  //     "./public-placeholder" to "." so the real site is served.
+  //  4. Deploy from main:  npx wrangler deploy
 }

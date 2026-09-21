@@ -46,11 +46,31 @@
     a.addEventListener('click', function () { select.value = a.getAttribute('data-service'); });
   });
 
-  // Contact form -> opens the visitor's email app with the message pre-filled.
-  // (Static site: swap this for a form service endpoint if you want in-page submission.)
+  // Contact form -> POST /api/contact (Cloudflare Worker emails it to the owner).
+  // If the API is unavailable (offline, not deployed yet), fall back to opening the visitor's email app.
   var form = document.getElementById('form');
   var status = document.getElementById('status');
+  var submitBtn = form.querySelector('button[type="submit"]');
   var TO = 'reyesconstruction.info@gmail.com';
+
+  function setStatus(text, isError) {
+    status.textContent = text;
+    status.classList.toggle('is-error', !!isError);
+  }
+
+  function openEmailApp(data) {
+    var subject = 'Free estimate request: ' + data.service;
+    var body = [
+      'Name: ' + data.name,
+      'Phone: ' + (data.phone || '—'),
+      'Email: ' + data.email,
+      'Service: ' + data.service,
+      '',
+      data.message
+    ].join('\n');
+    setStatus('Opening your email app — just press send. Or call (713) 430-6098.', false);
+    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -62,25 +82,46 @@
       return !ok;
     });
     if (bad.length) {
-      status.textContent = 'Please fill in your name, a valid email, and a short message.';
-      status.classList.add('is-error');
+      setStatus('Please fill in your name, a valid email, and a short message.', true);
       f[bad[0]].focus();
       return;
     }
-    status.classList.remove('is-error');
 
-    var subject = 'Free estimate request: ' + f.service.value;
-    var body = [
-      'Name: ' + f.name.value.trim(),
-      'Phone: ' + (f.phone.value.trim() || '—'),
-      'Email: ' + f.email.value.trim(),
-      'Service: ' + f.service.value,
-      '',
-      f.message.value.trim()
-    ].join('\n');
+    var data = {
+      name: f.name.value.trim(),
+      phone: f.phone.value.trim(),
+      email: f.email.value.trim(),
+      service: f.service.value,
+      message: f.message.value.trim(),
+      website: f.website ? f.website.value : '' // honeypot: stays empty for real visitors
+    };
 
-    status.textContent = 'Opening your email app — just press send. Or call (713) 430-6098.';
-    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    submitBtn.disabled = true;
+    setStatus('Sending…', false);
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) {
+        return res.json().then(
+          function (body) { return { status: res.status, body: body }; },
+          function () { return { status: res.status, body: null }; }
+        );
+      })
+      .then(function (r) {
+        if (r.body && r.body.ok) {
+          form.reset();
+          setStatus('Thank you! Your request was sent — we will contact you shortly.', false);
+        } else if (r.status === 422 && r.body && r.body.error) {
+          setStatus(r.body.error, true); // the server rejected something the visitor can fix
+        } else {
+          openEmailApp(data);
+        }
+      })
+      .catch(function () { openEmailApp(data); })
+      .then(function () { submitBtn.disabled = false; });
   });
   form.addEventListener('input', function (e) { e.target.classList.remove('is-invalid'); });
 

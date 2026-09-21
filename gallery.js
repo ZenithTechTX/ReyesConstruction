@@ -1,4 +1,4 @@
-/* Project gallery: filter tabs + lightbox. Photos come from gallery-data.js (see update-gallery.ps1). */
+/* Project gallery: one tab per service (shows that service's photos only) + lightbox. Photos come from gallery-data.js (see update-gallery.ps1). */
 (function () {
   var data = window.GALLERY;
   var section = document.getElementById('gallery');
@@ -23,13 +23,13 @@
 
   // Filter tabs (skipped when there is only one service)
   if (cats.length > 1) {
-    [{ id: 'all', label: 'All' }].concat(cats).forEach(function (c) {
+    cats.forEach(function (c) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'filter';
       b.textContent = c.label;
       b.dataset.cat = c.id;
-      b.setAttribute('aria-pressed', String(c.id === 'all'));
+      b.setAttribute('aria-pressed', 'false');
       filters.appendChild(b);
     });
   } else {
@@ -70,7 +70,7 @@
   function applyFilter(cat) {
     visible = [];
     shots.forEach(function (s, i) {
-      var show = cat === 'all' || s.dataset.cat === cat;
+      var show = s.dataset.cat === cat;
       s.hidden = !show;
       if (show) visible.push(i);
     });
@@ -78,7 +78,7 @@
       f.setAttribute('aria-pressed', String(f.dataset.cat === cat));
     });
   }
-  applyFilter('all');
+  applyFilter(cats[0].id);
 
   filters.addEventListener('click', function (e) {
     var f = e.target.closest('.filter');
