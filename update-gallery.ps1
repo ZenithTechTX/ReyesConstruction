@@ -19,7 +19,7 @@ $root     = $PSScriptRoot
 $inbox    = Join-Path $root 'gallery-inbox'
 $out      = Join-Path $root 'assets\gallery'
 $dataFile = Join-Path $root 'gallery-data.js'
-$maxSize  = 1600
+$maxSize  = 1280
 $standard = 'remodeling', 'roofing', 'painting', 'sheetrock', 'ac', 'tile'
 $textInfo = (Get-Culture).TextInfo
 
@@ -53,7 +53,7 @@ function Save-Resized($src, $dst) {
     $g.Dispose()
     $codec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object MimeType -eq 'image/jpeg'
     $ep = New-Object System.Drawing.Imaging.EncoderParameters(1)
-    $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]82)
+    $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]68)
     $bmp.Save($dst, $codec, $ep)
     $bmp.Dispose()
   } finally { $img.Dispose() }

@@ -3,7 +3,8 @@ window.GALLERY = {
   categories: [
     { id: "remodeling", label: "Remodeling" },
     { id: "painting", label: "Painting" },
-    { id: "bathroom", label: "Bathroom" }
+    { id: "bathroom", label: "Bathroom" },
+    { id: "wood-restoration", label: "Wood Restoration" }
   ],
   items: [
     { cat: "remodeling", src: "assets/gallery/remodeling/interior-framing.jpg", title: "Interior Framing", w: 1800, h: 1350 },
@@ -14,6 +15,10 @@ window.GALLERY = {
     { cat: "bathroom", src: "assets/gallery/bathroom/03-bathroom-remodel-before.jpg", title: "Bathroom Remodel Before", w: 480, h: 640 },
     { cat: "bathroom", src: "assets/gallery/bathroom/04-bathroom-remodel-after.jpg", title: "Bathroom Remodel After", w: 480, h: 640 },
     { cat: "bathroom", src: "assets/gallery/bathroom/05-bathroom-remodel.jpg", title: "Bathroom Remodel", w: 1103, h: 1597 },
-    { cat: "bathroom", src: "assets/gallery/bathroom/06-bathroom-remodel.jpg", title: "Bathroom Remodel", w: 919, h: 1600 }
+    { cat: "bathroom", src: "assets/gallery/bathroom/06-bathroom-remodel.jpg", title: "Bathroom Remodel", w: 919, h: 1600 },
+    { cat: "wood-restoration", src: "assets/gallery/wood-restoration/1-wood-rot-repair-and-restoration-before.jpg", title: "Wood Rot Repair And Restoration Before", w: 1280, h: 960 },
+    { cat: "wood-restoration", src: "assets/gallery/wood-restoration/2-wood-rot-repair-and-restoration-after.jpg", title: "Wood Rot Repair And Restoration After", w: 1280, h: 720 },
+    { cat: "wood-restoration", src: "assets/gallery/wood-restoration/3-wood-rot-repair-and-restoration-before.jpg", title: "Wood Rot Repair And Restoration Before", w: 1280, h: 960 },
+    { cat: "wood-restoration", src: "assets/gallery/wood-restoration/4-wood-rot-repair-and-restoration-after.jpg", title: "Wood Rot Repair And Restoration After", w: 1280, h: 720 }
   ]
 };
