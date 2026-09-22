@@ -13,7 +13,7 @@ window.GALLERY = {
     { cat: "bathroom", src: "assets/gallery/bathroom/02-bathroom-remodel-after.jpg", title: "Bathroom Remodel After", w: 640, h: 480 },
     { cat: "bathroom", src: "assets/gallery/bathroom/03-bathroom-remodel-before.jpg", title: "Bathroom Remodel Before", w: 480, h: 640 },
     { cat: "bathroom", src: "assets/gallery/bathroom/04-bathroom-remodel-after.jpg", title: "Bathroom Remodel After", w: 480, h: 640 },
-    { cat: "bathroom", src: "assets/gallery/bathroom/05-bathroom-remodel-after.jpg", title: "Bathroom Remodel After", w: 1103, h: 1597 },
-    { cat: "bathroom", src: "assets/gallery/bathroom/06-bathroom-remodel-after.jpg", title: "Bathroom Remodel After", w: 919, h: 1600 }
+    { cat: "bathroom", src: "assets/gallery/bathroom/05-bathroom-remodel.jpg", title: "Bathroom Remodel", w: 1103, h: 1597 },
+    { cat: "bathroom", src: "assets/gallery/bathroom/06-bathroom-remodel.jpg", title: "Bathroom Remodel", w: 919, h: 1600 }
   ]
 };
