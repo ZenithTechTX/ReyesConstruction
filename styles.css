@@ -259,6 +259,14 @@ h4 { font-size: 1.25rem; font-weight: 700; letter-spacing: .03em; }
 
 /* Contact */
 .section--contact { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%); border-top: 1px solid var(--line); }
+.financing { display: grid; justify-items: center; gap: 32px; text-align: center; }
+.financing__head { max-width: 560px; display: grid; gap: 4px; }
+.financing__banner { display: block; width: 100%; max-width: 380px; }
+.financing__banner img {
+  display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .65); transition: transform .25s ease, box-shadow .25s ease;
+}
+.financing__banner:hover img, .financing__banner:focus-visible img { transform: translateY(-4px); box-shadow: 0 40px 70px -30px rgba(0, 0, 0, .75); }
 .contact { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 6vw, 88px); align-items: start; }
 .contact h2 { margin-bottom: 20px; }
 .contact .lead { margin-bottom: 34px; }
